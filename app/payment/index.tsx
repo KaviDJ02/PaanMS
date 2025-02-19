@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import {theme} from "../../theme";
 
 const ReceivedPayment: React.FC = () => {
     const [store, setStore] = useState<string>("");
@@ -46,8 +47,8 @@ const ReceivedPayment: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FDEACC",
-        justifyContent: "center",
+        backgroundColor: theme.colorBg,
+        paddingTop: 15,
         alignItems: "center",
         paddingHorizontal: 20,
     },
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     button: {
-        backgroundColor: "#F9A825",
+        backgroundColor: theme.colorPrimary,
+        width: "100%",
         paddingVertical: 12,
         paddingHorizontal: 40,
         borderRadius: 10,
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 4,
+        alignItems: "center",
     },
     buttonText: {
         fontSize: 18,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import {theme} from "../../theme";
 
 const BreadDropScreen: React.FC = () => {
     const [quantities, setQuantities] = useState<{ [key: string]: number }>({
@@ -9,6 +10,13 @@ const BreadDropScreen: React.FC = () => {
         A: 0,
         AH: 0,
     });
+
+    const breadPrices: { [key: string]: number } = {
+        T: 150,
+        TH: 80,
+        A: 130,
+        AH: 65,
+    };
 
     const [store, setStore] = useState<string | null>(null);
 
@@ -23,9 +31,10 @@ const BreadDropScreen: React.FC = () => {
     };
 
     const totalBreads = Object.values(quantities).reduce((sum, value) => sum + value, 0);
-    const totalAmount = totalBreads * 80; // Adjust price per bread as needed
+    const totalAmount = Object.keys(quantities).reduce((sum, type) => sum + quantities[type] * breadPrices[type], 0);
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             <Text style={styles.title}>Drop</Text>
 
@@ -62,13 +71,14 @@ const BreadDropScreen: React.FC = () => {
                 <Text style={styles.dropButtonText}>Drop</Text>
             </TouchableOpacity>
         </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fde7cc",
+        backgroundColor: theme.colorBg,
         padding: 20,
         alignItems: "center",
     },
@@ -93,14 +103,14 @@ const styles = StyleSheet.create({
         width: "90%",
         marginBottom: 10,
         borderWidth: 2,
-        borderColor: "#ffb100",
+        borderColor:theme.colorPrimary,
     },
     breadType: {
         fontSize: 18,
         flex: 1,
     },
     button: {
-        backgroundColor: "#ffb100",
+        backgroundColor: theme.colorPrimary,
         borderRadius: 50,
         width: 40,
         height: 40,
@@ -121,11 +131,13 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     dropButton: {
-        backgroundColor: "#ffb100",
+        backgroundColor: theme.colorPrimary,
+        width: "100%",
         paddingVertical: 15,
         paddingHorizontal: 80,
         borderRadius: 10,
         marginTop: 20,
+        alignItems: "center",
     },
     dropButtonText: {
         color: "#fff",
@@ -134,7 +146,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const pickerSelectStyles = {
+const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         backgroundColor: "#fff",
         padding: 10,
@@ -153,6 +165,6 @@ const pickerSelectStyles = {
         marginBottom: 10,
         fontSize: 16,
     },
-};
+});
 
 export default BreadDropScreen;

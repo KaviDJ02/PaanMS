@@ -11,14 +11,16 @@ export default function DashboardScreen() {
         router.push("/bread/breadDrop");
     };
 
+    const today = new Intl.DateTimeFormat('en-CA').format(new Date());
+
     return (
         <View style={styles.container}>
             {/* Date & Settings */}
             <View style={styles.header}>
-                <Text style={styles.date}>2025.02.20</Text>
-                <MaterialIcons name="settings" size={24} color="#D88C3D" />
+                <Text style={styles.date}>{today}</Text>
+                <MaterialIcons name="settings" size={24} color={theme.colorPrimary} />
             </View>
-            <Text style={styles.day}>Sunday</Text>
+            <Text style={styles.day}>{new Date().toLocaleDateString('en-CA', { weekday: 'long' })}</Text>
 
             {/* Bread Section */}
             <Text style={styles.sectionTitle}>Bread</Text>
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     button: {
-        backgroundColor: "#F4A43C",
+        backgroundColor: theme.colorPrimary,
         paddingVertical: 12,
         borderRadius: 10,
         alignItems: "center",

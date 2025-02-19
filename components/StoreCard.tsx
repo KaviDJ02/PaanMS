@@ -24,7 +24,7 @@ const StoreCard: React.FC<StoreCardProps> = ({ store, onDelete }) => {
             <View style={styles.header}>
                 <Text style={styles.storeName}>{store.name}</Text>
                 <TouchableOpacity onPress={() => onDelete(store.id)}>
-                    <FontAwesome name="trash" size={24} color="black" />
+                    <FontAwesome name="trash" size={24} color={theme.colorPrimary} />
                 </TouchableOpacity>
             </View>
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     amount: {
         fontSize: 18,
         fontWeight: "bold",
-        color: "#000",
+        color: "#ef1414",
     },
 });
 

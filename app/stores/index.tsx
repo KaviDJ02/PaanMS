@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView} from "react-native";
 import StoreCard from "../../components/StoreCard";
 import { useState } from "react";
 import {theme} from "../../theme";
@@ -17,11 +17,13 @@ export default function StoresScreen() {
     };
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             {stores.map((store) => (
                 <StoreCard key={store.id} store={store} onDelete={() => deleteStore(store.id)} />
             ))}
         </View>
+        </ScrollView>
     );
 }
 
