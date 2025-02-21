@@ -5,11 +5,16 @@ import {theme} from "../../theme";
 
 export default function StoresScreen() {
     const [stores, setStores] = useState([
-        { id: 1, name: "Store A", T: 50, TH: 50, A: 50, AH: 50, due: 2500 },
-        { id: 2, name: "Store B", T: 30, TH: 40, A: 20, AH: 10, due: 1500 },
-        { id: 3, name: "Store C", T: 30, TH: 40, A: 20, AH: 10, due: 2000 },
-        { id: 4, name: "Store D", T: 30, TH: 40, A: 20, AH: 10, due: 1500 },
-        { id: 5, name: "Store E", T: 30, TH: 40, A: 20, AH: 10, due: 3000 },
+        { id: 1, name: "Cargills Food City", T: 100, TH: 80, A: 60, AH: 40, due: 5000 },
+        { id: 2, name: "Keells Super", T: 90, TH: 70, A: 50, AH: 30, due: 4500 },
+        { id: 3, name: "Arpico Supercentre", T: 120, TH: 100, A: 80, AH: 60, due: 6000 },
+        { id: 4, name: "Laugfs Super", T: 110, TH: 90, A: 70, AH: 50, due: 5500 },
+        { id: 5, name: "Sathosa", T: 80, TH: 60, A: 40, AH: 20, due: 4000 },
+        { id: 6, name: "Glomark", T: 95, TH: 75, A: 55, AH: 35, due: 4750 },
+        { id: 7, name: "SPAR", T: 85, TH: 65, A: 45, AH: 25, due: 4250 },
+        { id: 8, name: "Lanka Sathosa", T: 105, TH: 85, A: 65, AH: 45, due: 5250 },
+        { id: 9, name: "Food City Express", T: 75, TH: 55, A: 35, AH: 15, due: 3750 },
+        { id: 10, name: "Arpico Daily", T: 115, TH: 95, A: 75, AH: 55, due: 5750 },
     ]);
 
     const deleteStore = (id: number) => {

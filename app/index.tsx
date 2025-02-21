@@ -18,7 +18,9 @@ export default function DashboardScreen() {
             {/* Date & Settings */}
             <View style={styles.header}>
                 <Text style={styles.date}>{today}</Text>
+                <TouchableOpacity onPress={() => {console.log("Settings pressed")}}>
                 <MaterialIcons name="settings" size={24} color={theme.colorPrimary} />
+                </TouchableOpacity>
             </View>
             <Text style={styles.day}>{new Date().toLocaleDateString('en-CA', { weekday: 'long' })}</Text>
 

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import {theme} from "../../theme";
+import { theme } from "../../theme";
+import { useRouter } from "expo-router";
 
-const BreadDropScreen: React.FC = () => {
+const BreadReturnScreen: React.FC = () => {
     const [quantities, setQuantities] = useState<{ [key: string]: number }>({
         Theti: 0,
         ThetiHalf: 0,
@@ -20,6 +21,8 @@ const BreadDropScreen: React.FC = () => {
 
     const [store, setStore] = useState<string | null>(null);
 
+    const router = useRouter();
+
     const handleIncrement = (type: string) => {
         setQuantities((prev) => ({ ...prev, [type]: prev[type] + 1 }));
     };
@@ -33,48 +36,53 @@ const BreadDropScreen: React.FC = () => {
     const totalBreads = Object.values(quantities).reduce((sum, value) => sum + value, 0);
     const totalAmount = Object.keys(quantities).reduce((sum, type) => sum + quantities[type] * breadPrices[type], 0);
 
+    const handleReturn = () => {
+        console.log("Return btn pressed..");
+        // Add logic to save or process the returned bread
+        router.back(); // Navigate back to the previous screen
+    };
+
     return (
         <ScrollView style={styles.container}>
-        <View>
-            <Text style={styles.title}>Drop</Text>
+            <View>
+                <Text style={styles.title}>Return</Text>
 
-            <Text style={styles.label}>Types</Text>
-            {Object.keys(quantities).map((type) => (
-                <View key={type} style={styles.row}>
-                    <Text style={styles.breadType}>{type}</Text>
-                    <TouchableOpacity onPress={() => handleDecrement(type)} style={styles.button}>
-                        <Text style={styles.buttonText}>-</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.quantity}>{quantities[type]}</Text>
-                    <TouchableOpacity onPress={() => handleIncrement(type)} style={styles.button}>
-                        <Text style={styles.buttonText}>+</Text>
-                    </TouchableOpacity>
-                </View>
-            ))}
+                <Text style={styles.label}>Types</Text>
+                {Object.keys(quantities).map((type) => (
+                    <View key={type} style={styles.row}>
+                        <Text style={styles.breadType}>{type}</Text>
 
-            <Text style={styles.label}>Store:</Text>
-            <RNPickerSelect
-                onValueChange={(value) => setStore(value)}
-                items={[
-                    { label: "Store 1", value: "store1" },
-                    { label: "Store 2", value: "store2" },
-                    { label: "Store 3", value: "store3" },
-                ]}
-                style={pickerSelectStyles}
-                placeholder={{ label: "Select store", value: null }}
-            />
+                        <TouchableOpacity onPress={() => handleDecrement(type)} style={styles.button}>
+                            <Text style={styles.buttonText}>-</Text>
+                        </TouchableOpacity>
 
-            <Text style={styles.totalText}>Total Breads :{"   "}
-                <Text style={styles.total}>{totalBreads}</Text>
-            </Text>
-            <Text style={styles.totalText}>Total Amount :{"  "}
-                <Text style={styles.total}>Rs {totalAmount}</Text>
-            </Text>
+                        <Text style={styles.quantity}>{quantities[type]}</Text>
 
-            <TouchableOpacity style={styles.dropButton} onPress={() => {console.log("Drop btn pressed..")}}>
-                <Text style={styles.dropButtonText} >Drop</Text>
-            </TouchableOpacity>
-        </View>
+                        <TouchableOpacity onPress={() => handleIncrement(type)} style={styles.button}>
+                            <Text style={styles.buttonText}>+</Text>
+                        </TouchableOpacity>
+                    </View>
+                ))}
+
+                <Text style={styles.label}>Store:</Text>
+                <RNPickerSelect
+                    onValueChange={(value) => setStore(value)}
+                    items={[
+                        { label: "Store 1", value: "store1" },
+                        { label: "Store 2", value: "store2" },
+                        { label: "Store 3", value: "store3" },
+                    ]}
+                    style={pickerSelectStyles}
+                    placeholder={{ label: "Select store", value: null }}
+                />
+
+                <Text style={styles.totalText}>Total Breads: <Text style={styles.total}>{totalBreads}</Text></Text>
+                <Text style={styles.totalText}>Total Amount: <Text style={styles.total}>Rs {totalAmount}</Text></Text>
+
+                <TouchableOpacity style={styles.returnButton} onPress={handleReturn}>
+                    <Text style={styles.returnButtonText}>Return</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
         width: "95%",
         marginBottom: 10,
         borderWidth: 2,
-        borderColor:theme.colorPrimary,
+        borderColor: theme.colorPrimary,
     },
     breadType: {
         fontSize: 18,
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginVertical: 5,
     },
-    dropButton: {
+    returnButton: {
         backgroundColor: theme.colorPrimary,
         width: "100%",
         paddingVertical: 15,
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignItems: "center",
     },
-    dropButtonText: {
+    returnButtonText: {
         color: "#fff",
         fontSize: 20,
         fontWeight: "bold",
@@ -152,7 +160,6 @@ const styles = StyleSheet.create({
         color: "black",
         fontSize: 18,
         marginLeft: 20,
-
     },
 });
 
@@ -177,4 +184,4 @@ const pickerSelectStyles = StyleSheet.create({
     },
 });
 
-export default BreadDropScreen;
+export default BreadReturnScreen;
