@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Picker } from '@react-native-picker/picker';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import {theme} from "../../theme";
 
@@ -17,13 +18,18 @@ const ReceivedPayment: React.FC = () => {
 
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>Store:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="select store"
-                    placeholderTextColor="#aaa"
-                    value={store}
-                    onChangeText={setStore}
-                />
+                <Picker
+                    style={styles.picker}
+                    selectedValue={store}
+                    onValueChange={(itemValue) => setStore(itemValue)}
+                >
+                    <Picker.Item label="Store A" value="storeA" />
+                    <Picker.Item label="Store B" value="storeB" />
+                    <Picker.Item label="Store C" value="storeC" />
+                    <Picker.Item label="Store D" value="storeD" />
+                    <Picker.Item label="Store E" value="storeE" />
+
+                </Picker>
             </View>
 
             <View style={styles.inputGroup}>
@@ -65,6 +71,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         marginBottom: 5,
+    },
+    picker: {
+        backgroundColor: theme.colorWhite,
+        borderRadius: 10,
+        padding: 0,
+        fontSize: 16,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
     },
     input: {
         backgroundColor: "#fff",

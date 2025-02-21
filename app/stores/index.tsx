@@ -17,8 +17,8 @@ export default function StoresScreen() {
     };
 
     return (
-        <ScrollView>
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
+        <View >
             {stores.map((store) => (
                 <StoreCard key={store.id} store={store} onDelete={() => deleteStore(store.id)} />
             ))}
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: theme.colorBg,
         flex: 1,
+        width: '100%',
+        height: '100%',
     },
     text: {
         // fontSize: 24,

@@ -5,17 +5,17 @@ import {theme} from "../../theme";
 
 const BreadDropScreen: React.FC = () => {
     const [quantities, setQuantities] = useState<{ [key: string]: number }>({
-        T: 0,
-        TH: 0,
-        A: 0,
-        AH: 0,
+        Theti: 0,
+        ThetiHalf: 0,
+        Achchu: 0,
+        AchchuHalf: 0,
     });
 
     const breadPrices: { [key: string]: number } = {
-        T: 150,
-        TH: 80,
-        A: 130,
-        AH: 65,
+        Theti: 150,
+        ThetiHalf: 80,
+        Achchu: 130,
+        AchchuHalf: 65,
     };
 
     const [store, setStore] = useState<string | null>(null);
@@ -34,8 +34,8 @@ const BreadDropScreen: React.FC = () => {
     const totalAmount = Object.keys(quantities).reduce((sum, type) => sum + quantities[type] * breadPrices[type], 0);
 
     return (
-        <ScrollView>
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
+        <View>
             <Text style={styles.title}>Drop</Text>
 
             <Text style={styles.label}>Types</Text>
@@ -64,11 +64,15 @@ const BreadDropScreen: React.FC = () => {
                 placeholder={{ label: "Select store", value: null }}
             />
 
-            <Text style={styles.totalText}>Total Breads: {totalBreads}</Text>
-            <Text style={styles.totalText}>Total Amount: Rs {totalAmount}</Text>
+            <Text style={styles.totalText}>Total Breads :{"   "}
+                <Text style={styles.total}>{totalBreads}</Text>
+            </Text>
+            <Text style={styles.totalText}>Total Amount :{"  "}
+                <Text style={styles.total}>Rs {totalAmount}</Text>
+            </Text>
 
-            <TouchableOpacity style={styles.dropButton}>
-                <Text style={styles.dropButtonText}>Drop</Text>
+            <TouchableOpacity style={styles.dropButton} onPress={() => {console.log("Drop btn pressed..")}}>
+                <Text style={styles.dropButtonText} >Drop</Text>
             </TouchableOpacity>
         </View>
         </ScrollView>
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: theme.colorBg,
         padding: 20,
-        alignItems: "center",
+        // alignItems: "center",
     },
     title: {
         fontSize: 28,
@@ -91,22 +95,23 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "500",
         alignSelf: "flex-start",
-        marginBottom: 5,
+        marginBottom: 10,
     },
     row: {
         flexDirection: "row",
         backgroundColor: "#fff",
-        padding: 15,
+        padding: 10,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: "space-between",
-        width: "90%",
+        width: "95%",
         marginBottom: 10,
         borderWidth: 2,
         borderColor:theme.colorPrimary,
     },
     breadType: {
         fontSize: 18,
+        paddingLeft: 10,
         flex: 1,
     },
     button: {
@@ -143,6 +148,12 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 20,
         fontWeight: "bold",
+    },
+    total: {
+        color: "black",
+        fontSize: 18,
+        marginLeft: 20,
+
     },
 });
 
